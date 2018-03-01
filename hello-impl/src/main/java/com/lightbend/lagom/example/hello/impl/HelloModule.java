@@ -11,5 +11,6 @@ public class HelloModule extends AbstractModule implements ServiceGuiceSupport {
     @Override
     protected void configure() {
         bindService(HelloService.class, HelloServiceImpl.class);
+        bind(SaysHello.class).to(RealGreeter.class);
     }
 }

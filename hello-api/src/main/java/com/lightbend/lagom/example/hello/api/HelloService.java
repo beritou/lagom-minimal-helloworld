@@ -17,15 +17,18 @@ import static com.lightbend.lagom.javadsl.api.Service.pathCall;
 public interface HelloService extends Service {
 
     /**
-     * Example: curl http://localhost:9000/api/hello/Alice
+     * //TODO: PR this into Tim's repo (the removal of /api/)
+     http://localhost:9000/hello/Alice
      */
     ServiceCall<NotUsed, String> hello(String id);
+    ServiceCall<NotUsed, String> customHello(String id);
 
     @Override
     default Descriptor descriptor() {
         return named("hello")
                 .withCalls(
-                        pathCall("/hello/:id", this::hello)
+                        pathCall("/hello/:id", this::hello),
+                        pathCall("/customHello/:id", this::customHello)
                 )
                 .withAutoAcl(true);
     }
